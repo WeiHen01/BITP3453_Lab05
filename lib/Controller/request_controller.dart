@@ -27,7 +27,11 @@ class RequestController {
       body: jsonEncode(_body),
     );
 
-    _parseResult();
+    if (_res?.statusCode == 200) {
+      _parseResult();
+    } else {
+      print("HTTP request failed with status code: ${_res?.statusCode}");
+    }
   }
 
   Future<void> get() async {

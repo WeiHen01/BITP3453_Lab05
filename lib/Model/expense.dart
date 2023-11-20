@@ -7,12 +7,12 @@ class Expense{
   Expense(this.amount, this.desc, this.dateTime);
 
   Expense.fromJson(Map<String, dynamic> json)
-    : desc = json['desc'],
-      amount = json['amount'],
-      dateTime = json['dateTime'];
+    : amount = json['amount'],
+        desc = json['desc'],
+        dateTime = json['dateTime'];
 
   Map<String, dynamic> toJson() =>
-      {'desc': desc, 'amount': amount, 'dateTime': dateTime};
+      {'desc': desc, 'amount': amount, 'dateTime': dateTime.toString()};
 
   Future<bool> save() async {
     RequestController req = RequestController(path: "/api/expenses.php");
