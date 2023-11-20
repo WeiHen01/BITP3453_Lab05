@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 class RequestController {
   String path;
   String server;
-  http.Response? _res;
+  var _res;
   final Map<dynamic, dynamic> _body = {};
   final Map<String, String> _headers = {};
   dynamic _resultData;
