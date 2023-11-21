@@ -13,7 +13,7 @@ class RequestController {
    * constructor
    */
   RequestController({required this.path, this.server =
-  "http://10.0.2.2" /*10.0.0.2 for emulated device*/});
+  "http://10.131.79.16" /*10.0.0.2 for emulated device*/});
   setBody(Map<String, dynamic> data){
     _body.clear();
     _body.addAll(data);
@@ -36,6 +36,14 @@ class RequestController {
 
   Future<void> get() async {
     _res = await http.get(
+      Uri.parse(server + path),
+      headers: _headers,
+    );
+    _parseResult();
+  }
+
+  Future<void> put() async {
+    _res = await http.put(
       Uri.parse(server + path),
       headers: _headers,
     );

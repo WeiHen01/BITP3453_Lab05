@@ -7,12 +7,12 @@ class Expense{
   Expense(this.amount, this.desc, this.dateTime);
 
   Expense.fromJson(Map<String, dynamic> json)
-    : amount = json['amount'],
-        desc = json['desc'],
+    :desc = json['desc'],
+        amount = json['amount'],
         dateTime = json['dateTime'];
 
   Map<String, dynamic> toJson() =>
-      {'desc': desc, 'amount': amount, 'dateTime': dateTime.toString()};
+      {'amount': amount, 'desc': desc, 'dateTime': dateTime.toString()};
 
   Future<bool> save() async {
     RequestController req = RequestController(path: "/api/expenses.php");
@@ -20,6 +20,22 @@ class Expense{
 
     try{
       await req.post();
+      print(req.status());
+      if (req.status() == 200){
+        return true;
+      }
+    } catch (e) {
+      print("Exception during HTTP request: $e");
+    }
+    return false;
+  }
+
+  Future<bool> update() async {
+    RequestController req = RequestController(path: "/api/expenses.php");
+    req.setBody(toJson());
+
+    try{
+      await req.put();
       print(req.status());
       if (req.status() == 200){
         return true;
