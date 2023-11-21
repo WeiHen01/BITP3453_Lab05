@@ -45,6 +45,8 @@ class _ExpenseListState extends State<ExpenseList> {
   final TextEditingController totalController = TextEditingController();
   final TextEditingController txtDateController = TextEditingController();
   double total = 0.0;
+
+  bool success = false;
   // added new parameter for Expense Constructor = DateTime text
 
   void _addExpense() async{
@@ -402,7 +404,6 @@ class EditExpenseScreen extends StatelessWidget {
                   // Save the edited expense details
                   onSave(Expense(double.parse(amountController.text),
                       descController.text, txtDateController.text));
-
 
                   // Navigate back to ExpenseList screen
                   Navigator.pop(context);

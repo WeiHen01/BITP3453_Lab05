@@ -13,7 +13,8 @@ class RequestController {
    * constructor
    */
   RequestController({required this.path, this.server =
-  "http://10.131.79.16" /*10.0.0.2 for emulated device*/});
+  "http://10.131.79.16" /*10.0.0.2 for emulated device,
+  the ip address need to follow the network ip address*/});
   setBody(Map<String, dynamic> data){
     _body.clear();
     _body.addAll(data);
@@ -46,6 +47,7 @@ class RequestController {
     _res = await http.put(
       Uri.parse(server + path),
       headers: _headers,
+      body: jsonEncode(_body),
     );
     _parseResult();
   }
